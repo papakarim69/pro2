@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Karim Travel - Chauffeur Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0f1c;
+            --p: #121a2e;
+            --p2: #18223b;
+            --ln: #243152;
+            --tx: #e8edf8;
+            --mut: #8b9ac0;
+            --acc: #f5b301;
+            --ok: #2fd18b;
+            --bad: #ff5d6c;
+            --blue: #4c8dff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--tx);
+            font-family: 'Manrope', system-ui, 'Segoe UI', sans-serif;
+            line-height: 1.45;
+        }
+
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 24px;
+            background: var(--p);
+            border-bottom: 1px solid var(--ln);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 19px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Logo Vectoriel Karim Travel Integré */
+        .logo-container {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: var(--acc);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(245, 179, 1, 0.3);
+            flex-shrink: 0;
+        }
+
+        .logo-container svg {
+            width: 28px;
+            height: 28px;
+            fill: #1b1400;
+        }
+
+        .date {
+            color: var(--mut);
+            font-size: 13px;
+        }
+
+        .wrap {
+            max-width: 1280px;
+            margin: auto;
+            padding: 20px 24px 40px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .kpi {
+            background: var(--p);
+            border: 1px solid var(--ln);
+            border-radius: 14px;
+            padding: 16px 18px;
+            border-left: 4px solid var(--c, var(--blue));
+        }
+
+        .kpi small {
+            color: var(--mut);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .kpi b {
+            display: block;
+            font-size: 28px;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            margin-top: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: var(--p);
+            border: 1px solid var(--ln);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .card>h2 {
+            margin: 0;
+            padding: 14px 18px;
+            font-size: 15px;
+            font-weight: 800;
+            background: var(--p2);
+            border-bottom: 1px solid var(--ln);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card>h2 span {
+            color: var(--mut);
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .body {
+            padding: 18px;
+        }
+
+        .c5 {
+            grid-column: span 5;
+        }
+
+        .c4 {
+            grid-column: span 4;
+        }
+
+        .c3 {
+            grid-column: span 3;
+        }
+
+        .c8 {
+            grid-column: span 8;
+        }
+
+        .c12 {
+            grid-column: span 12;
+        }
+
+        .f {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .f>* {
+            min-width: 0;
+        }
+
+        input {
+            flex: 1;
+            background: var(--bg);
+            color: var(--tx);
+            border: 1px solid var(--ln);
+            border-radius: 10px;
+            padding: 12px;
+            font: inherit;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        input:focus {
+            outline: 2px solid var(--blue);
+            border-color: transparent;
+        }
+
+        button,
+        .btn {
+            border: 0;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font: inherit;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            background: var(--acc);
+            color: #1b1400;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        button.g,
+        .btn.g {
+            background: var(--p2);
+            color: var(--tx);
+            border: 1px solid var(--ln);
+        }
+
+        button.b,
+        .btn.b {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .chips button {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .count {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .count b {
+            font-size: 54px;
+            font-weight: 800;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .count span {
+            color: var(--mut);
+            font-size: 13px;
+        }
+
+        .mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .mini div {
+            background: var(--bg);
+            border: 1px solid var(--ln);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .mini small {
+            color: var(--mut);
+            font-size: 12px;
+            display: block;
+        }
+
+        .mini b {
+            font-size: 17px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: 170px;
+            overflow: auto;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 9px 0;
+            border-top: 1px solid var(--ln);
+            font-size: 14px;
+            gap: 8px;
+        }
+
+        li i {
+            font-style: normal;
+            color: var(--mut);
+            font-size: 12px;
+            margin-right: 6px;
+        }
+
+        li button {
+            padding: 2px 9px;
+            background: none;
+            color: var(--bad);
+            border: 1px solid var(--ln);
+        }
+
+        .emp {
+            color: var(--mut);
+            font-size: 14px;
+            border: 0;
+        }
+
+        .ok {
+            color: var(--ok);
+        }
+
+        .bad {
+            color: var(--bad);
+        }
+
+        .rest {
+            background: linear-gradient(135deg, #123b32, #0f2a3a);
+            border: 1px solid var(--ln);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .rest small {
+            color: var(--mut);
+            font-size: 13px;
+        }
+
+        .rest b {
+            display: block;
+            font-size: 34px;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .veh {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .veh button {
+            flex-direction: column;
+            background: var(--bg);
+            color: var(--tx);
+            border: 2px solid var(--ln);
+            padding: 16px 6px;
+            font-size: 14px;
+        }
+
+        .veh button em {
+            font-style: normal;
+            font-size: 28px;
+        }
+
+        .veh button.on {
+            border-color: var(--acc);
+            background: #2a2208;
+        }
+
+        .map {
+            height: 340px;
+            border-radius: 12px;
+            border: 1px solid var(--ln);
+            background: var(--bg);
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+            color: var(--mut);
+            text-align: center;
+            padding: 16px;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+            margin: -16px;
+        }
+
+        .msg {
+            font-size: 13px;
+            color: var(--mut);
+            margin: 0 0 10px;
+        }
+
+        .msg.e {
+            color: var(--bad);
+        }
+
+        .ct {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 12px;
+        }
+
+        .k {
+            background: var(--bg);
+            border: 1px solid var(--ln);
+            border-radius: 12px;
+            padding: 12px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .k.s {
+            border-color: #5a2630;
+        }
+
+        .k .f {
+            margin: 0;
+        }
+
+        .k .btn,
+        .k button {
+            padding: 10px;
+        }
+
+        @media(max-width:980px) {
+            .kpis {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .c5,
+            .c4,
+            .c3,
+            .c8 {
+                grid-column: span 12;
+            }
+
+            .veh {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media(max-width:520px) {
+            .wrap {
+                padding: 14px;
+            }
+
+            .top {
+                padding: 12px 14px;
+            }
+
+            .veh {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .map {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <div class="brand">
+            <div class="logo-container">
+                <!-- Icone SVG Personnalisee Karim Travel -->
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
+                </svg>
+            </div>
+            Karim Travel
+        </div>
+        <div class="date" id="date"></div>
+        <button class="g" id="reset">Nouvelle journée</button>
+    </div>
+
+    <div class="wrap">
+        <div class="kpis">
+            <div class="kpi" style="--c:var(--ok)"><small>Gains du jour</small><b id="kG">0</b></div>
+            <div class="kpi" style="--c:var(--blue)"><small>Courses</small><b id="kC">0</b></div>
+            <div class="kpi" style="--c:var(--bad)"><small>Dépenses</small><b id="kD">0</b></div>
+            <div class="kpi" style="--c:var(--acc)"><small>Reste net</small><b id="kN">0</b></div>
+        </div>
+
+        <div class="grid">
+            <div class="card c5">
+                <h2>Caisse et courses <span id="avg"></span></h2>
+                <div class="body">
+                    <div class="count"><b id="cnt">0</b><span>courses aujourd'hui</span></div>
+                    <div class="f"><input id="amt" type="number" inputmode="numeric" min="0"
+                            placeholder="Prix de la course (FCFA)"><button id="addRide">Ajouter</button></div>
+                    <div class="chips" id="quick"></div>
+                    <div class="mini">
+                        <div><small>Total encaissé</small><b id="cTot">0</b></div>
+                        <div><small>Versé au propriétaire</small><b id="cVer">0</b></div>
+                    </div>
+                    <div class="f"><input id="ver" type="number" inputmode="numeric" min="0"
+                            placeholder="Montant du versement"><button class="g" id="addVer">Verser</button></div>
+                    <ul id="rides"></ul>
+                </div>
+            </div>
+
+            <div class="card c4">
+                <h2>Gains et dépenses</h2>
+                <div class="body">
+                    <div class="rest"><small>Il me reste (gains − dépenses − versements)</small><b id="gN">0</b></div>
+                    <div class="f"><input id="dl" placeholder="Carburant, repas…"><input id="da" type="number"
+                            inputmode="numeric" min="0" placeholder="Montant" style="max-width:110px"></div>
+                    <div class="f"><button id="addDep" style="width:100%">Ajouter la dépense</button></div>
+                    <ul id="deps"></ul>
+                </div>
+            </div>
+
+            <div class="card c3">
+                <h2>Mon véhicule</h2>
+                <div class="body">
+                    <div class="veh" id="veh"></div>
+                    <p class="msg" style="margin-top:12px">Prix habituel d'une course</p>
+                    <div class="f"><input id="rate" type="number" inputmode="numeric" min="0" placeholder="FCFA"><button
+                            class="g" id="saveRate">OK</button></div>
+                </div>
+            </div>
+
+            <div class="card c12">
+                <h2>Carte et localisation du client <span>Collez le lien reçu, puis OK</span></h2>
+                <div class="body">
+                    <div class="f"><input id="loc"
+                            placeholder="Collez ici la localisation envoyée par le client (lien, coordonnées ou adresse)"><button
+                            id="ok">OK</button><button class="g" id="me">Ma position</button></div>
+                    <p class="msg" id="locMsg">Exemples : un lien Google Maps, « 5.3600, -4.0083 » ou une adresse.</p>
+                    <div class="map" id="map">La carte s'affichera ici après avoir appuyé sur OK.</div>
+                    <div class="f"><a class="btn b" id="route" target="_blank" rel="noopener"
+                            style="display:none">Lancer l'itinéraire dans Maps</a><button class="g" id="clr"
+                            style="display:none">Effacer</button></div>
+                </div>
+            </div>
+
+            <div class="card c12">
+                <h2>Numéros utiles et urgences <span>Modifiez les numéros selon votre besoin</span></h2>
+                <div class="body">
+                    <div class="ct" id="ct"></div>
+                    <div class="f" style="margin-top:12px"><button class="g" id="addC">+ Ajouter un contact</button>
+                    </div>
+                    <p class="msg">Le bouton Appeler fonctionne sur téléphone. Sur ordinateur, utilisez Copier.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var KEY = 'karimTravel.v2', S, $ = function (i) {return document.getElementById(i)};
+            var DEF = {
+                rides: [], deps: [], vers: [], veh: 'Berline', rate: 0, loc: null, ct: [
+                    {n: 'Police secours', t: '17', s: 1}, {n: 'Sapeurs-pompiers', t: '18', s: 1}, {n: 'Ambulance / SAMU', t: '15', s: 1},
+                    {n: 'Mon numéro', t: '', s: 0}, {n: 'Mécanicien', t: '', s: 0}, {n: 'Propriétaire du véhicule', t: '', s: 0}]
+            };
+            try {S = JSON.parse(localStorage.getItem(KEY))} catch (e) { }
+            if (!S || !S.ct) S = JSON.parse(JSON.stringify(DEF));
+            function save() {try {localStorage.setItem(KEY, JSON.stringify(S))} catch (e) { } }
+            function f(n) {return Math.round(n).toLocaleString('fr-FR') + ' F'}
+            function sum(a) {return a.reduce(function (t, x) {return t + x.a}, 0)}
+            function esc(s) {return String(s).replace(/[&<>"']/g, function (c) {return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]})}
+            function hm(t) {return new Date(t).toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}
+            $('date').textContent = new Date().toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long'});
+
+            function render() {
+                var R = sum(S.rides), D = sum(S.deps), V = sum(S.vers), N = R - D - V, c = S.rides.length;
+                $('kG').textContent = f(R); $('kC').textContent = c; $('kD').textContent = f(D); $('kN').textContent = f(N);
+                $('cnt').textContent = c; $('avg').textContent = c ? 'Moyenne ' + f(R / c) : '';
+                $('cTot').textContent = f(R); $('cVer').textContent = f(V);
+                var g = $('gN'); g.textContent = f(N); g.className = N < 0 ? 'bad' : 'ok';
+                var rows = S.rides.map(function (r) {return {k: 'rides', l: 'Course', r: r}}).concat(S.vers.map(function (r) {return {k: 'vers', l: 'Versement', r: r}})).sort(function (a, b) {return b.r.t - a.r.t});
+                $('rides').innerHTML = rows.length ? rows.map(function (x) {return '<li><span><i>' + hm(x.r.t) + '</i>' + x.l + '</span><span><b>' + f(x.r.a) + '</b> <button data-k="' + x.k + '" data-t="' + x.r.t + '" aria-label="Supprimer">×</button></span></li>'}).join('') : '<li class="emp">Ajoutez votre première course.</li>';
+                $('deps').innerHTML = S.deps.length ? S.deps.slice().reverse().map(function (r) {return '<li><span>' + esc(r.l) + '</span><span><b>' + f(r.a) + '</b> <button data-k="deps" data-t="' + r.t + '" aria-label="Supprimer">×</button></span></li>'}).join('') : '<li class="emp">Aucune dépense enregistrée.</li>';
+                var V4 = [['Berline', '🚗'], ['Minibus', '🚐'], ['Bus', '🚌'], ['Camion', '🚚']];
+                $('veh').innerHTML = V4.map(function (v) {return '<button class="' + (v[0] === S.veh ? 'on' : '') + '" data-v="' + v[0] + '"><em>' + v[1] + '</em>' + v[0] + '</button>'}).join('');
+                $('rate').value = S.rate || '';
+                var q = $('quick'); q.innerHTML = '';
+                (S.rate > 0 ? [S.rate, S.rate * 2, S.rate * 3] : [500, 1000, 2000, 5000]).forEach(function (v) {var b = document.createElement('button'); b.className = 'g'; b.textContent = '+ ' + f(v); b.onclick = function () {addRide(v)}; q.appendChild(b)});
+                $('ct').innerHTML = S.ct.map(function (k, i) {var t = k.t.replace(/\s/g, ''); return '<div class="k' + (k.s ? ' s' : '') + '"><input data-i="' + i + '" data-f="n" value="' + esc(k.n) + '" aria-label="Nom"><input data-i="' + i + '" data-f="t" type="tel" value="' + esc(k.t) + '" placeholder="Numéro" aria-label="Numéro"><div class="f"><a class="btn" style="flex:1;' + (k.s ? 'background:var(--bad);color:#fff' : '') + '" href="' + (t ? 'tel:' + esc(t) : '#') + '">Appeler</a><button class="g" data-copy="' + i + '">Copier</button><button class="g" data-del="' + i + '" aria-label="Supprimer">×</button></div></div>'}).join('');
+                showMap();
+            }
+            function addRide(a) {a = +a; if (a > 0) {S.rides.push({a: a, t: Date.now()}); save(); render()} }
+            $('addRide').onclick = function () {addRide($('amt').value); $('amt').value = ''};
+            $('amt').onkeydown = function (e) {if (e.key === 'Enter') $('addRide').click()};
+            $('addVer').onclick = function () {var a = +$('ver').value; if (a > 0) {S.vers.push({a: a, t: Date.now()}); $('ver').value = ''; save(); render()} };
+            $('addDep').onclick = function () {var a = +$('da').value; if (a > 0) {S.deps.push({a: a, l: $('dl').value.trim() || 'Dépense', t: Date.now()}); $('da').value = ''; $('dl').value = ''; save(); render()} };
+            $('saveRate').onclick = function () {S.rate = +$('rate').value || 0; save(); render()};
+            $('addC').onclick = function () {S.ct.push({n: 'Nouveau contact', t: '', s: 0}); save(); render()};
+            $('reset').onclick = function () {if (confirm('Effacer les courses, dépenses et versements du jour ? Les contacts sont conservés.')) {S.rides = []; S.deps = []; S.vers = []; save(); render()} };
+            document.addEventListener('click', function (e) {
+                var t = e.target.closest('button'); if (!t) return;
+                if (t.dataset.k) {var k = t.dataset.k, ts = +t.dataset.t; S[k] = S[k].filter(function (x) {return x.t !== ts}); save(); render()}
+                else if (t.dataset.v) {S.veh = t.dataset.v; save(); render()}
+                else if (t.dataset.del) {if (confirm('Supprimer ce contact ?')) {S.ct.splice(+t.dataset.del, 1); save(); render()} }
+                else if (t.dataset.copy) {var n = S.ct[+t.dataset.copy].t; try {navigator.clipboard.writeText(n); t.textContent = 'Copié'} catch (x) {t.textContent = n} setTimeout(function () {t.textContent = 'Copier'}, 1500)}
+            });
+            document.addEventListener('input', function (e) {
+                var i = e.target.dataset.i; if (i === undefined) return; S.ct[i][e.target.dataset.f] = e.target.value; save();
+                var a = e.target.parentNode.querySelector('a'), t = S.ct[i].t.replace(/\s/g, ''); if (a) a.href = t ? 'tel:' + t : '#'
+            });
+
+            /* ---- Carte et localisation ---- */
+            function parseLoc(s) {
+                s = s.trim(); if (!s) return null;
+                try {s = decodeURIComponent(s)} catch (e) { }
+                if (/^https?:\/\//i.test(s)) {
+                    if (/goo\.gl|maps\.app/i.test(s)) return {err: 'Ce lien court ne peut pas être lu ici. Ouvrez-le, puis copiez les coordonnées ou l\'adresse, ou utilisez le bouton « Lancer l\'itinéraire ».', raw: s};
+                    var m = s.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/) || s.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || s.match(/[?&](?:q|ll|query|destination|daddr)=(-?\d+\.\d+)[,+ ]\s*(-?\d+\.\d+)/);
+                    if (m) return {lat: +m[1], lng: +m[2]};
+                    try {var u = new URL(s), q = u.searchParams.get('q') || u.searchParams.get('query') || u.searchParams.get('destination'); if (q) return {addr: q}} catch (e) { }
+                    return {err: 'Aucun lieu trouvé dans ce lien. Collez plutôt les coordonnées ou l\'adresse.', raw: s};
+                }
+                var c = s.match(/(-?\d{1,3}(?:\.\d+)?)\s*[,;\s]\s*(-?\d{1,3}\.\d+)/);
+                if (c && Math.abs(+c[1]) <= 90 && Math.abs(+c[2]) <= 180) return {lat: +c[1], lng: +c[2]};
+                return {addr: s};
+            }
+            function place(l) {return l.addr ? l.addr : l.lat + ',' + l.lng}
+            function showMap() {
+                var l = S.loc, m = $('map');
+                $('route').style.display = $('clr').style.display = l ? 'inline-flex' : 'none';
+                if (!l) {m.innerHTML = 'La carte s\'affichera ici après avoir appuyé sur OK.'; return }
+                var p = encodeURIComponent(place(l));
+                m.innerHTML = '<iframe title="Carte" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=' + p + '&z=16&output=embed"></iframe>';
+                $('route').href = 'https://www.google.com/maps/dir/?api=1&destination=' + p + '&travelmode=driving';
+            }
+            function setMsg(t, e) {var m = $('locMsg'); m.textContent = t; m.className = 'msg' + (e ? ' e' : '')}
+            $('ok').onclick = function () {
+                var r = parseLoc($('loc').value);
+                if (!r) {setMsg('Collez d\'abord la localisation du client.', 1); return }
+                if (r.err) {setMsg(r.err, 1); return }
+                S.loc = r; save(); showMap(); setMsg('Lieu du client affiché : ' + place(r));
+            };
+            $('loc').onkeydown = function (e) {if (e.key === 'Enter') $('ok').click()};
+            $('clr').onclick = function () {S.loc = null; $('loc').value = ''; save(); showMap(); setMsg('Carte effacée.')};
+            $('me').onclick = function () {
+                if (!navigator.geolocation) {setMsg('La localisation n\'est pas disponible sur cet appareil.', 1); return }
+                setMsg('Recherche de votre position…');
+                navigator.geolocation.getCurrentPosition(function (p) {S.loc = {lat: +p.coords.latitude.toFixed(6), lng: +p.coords.longitude.toFixed(6)}; save(); showMap(); setMsg('Voici votre position actuelle.')},
+                    function () {setMsg('Position refusée. Autorisez la localisation dans votre navigateur.', 1)}, {enableHighAccuracy: true, timeout: 15000});
+            };
+            render();
+        })();
+    </script>
+</body>
+
+</html>
