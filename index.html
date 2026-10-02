@@ -17,7 +17,10 @@
             --acc: #f5b301;
             --ok: #2fd18b;
             --bad: #ff5d6c;
+            --warn: #ff9f43;
             --blue: #4c8dff;
+            --orange: #ff7900;
+            --wave: #1dc4e9;
         }
 
         * {
@@ -54,7 +57,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* Logo Vectoriel Karim Travel Integré */
         .logo-container {
             width: 42px;
             height: 42px;
@@ -76,6 +78,7 @@
         .date {
             color: var(--mut);
             font-size: 13px;
+            text-transform: capitalize;
         }
 
         .wrap {
@@ -149,16 +152,20 @@
             padding: 18px;
         }
 
-        .c5 {
-            grid-column: span 5;
+        .c3 {
+            grid-column: span 3;
         }
 
         .c4 {
             grid-column: span 4;
         }
 
-        .c3 {
-            grid-column: span 3;
+        .c5 {
+            grid-column: span 5;
+        }
+
+        .c6 {
+            grid-column: span 6;
         }
 
         .c8 {
@@ -179,7 +186,8 @@
             min-width: 0;
         }
 
-        input {
+        input,
+        textarea {
             flex: 1;
             background: var(--bg);
             color: var(--tx);
@@ -191,7 +199,13 @@
             width: 100%;
         }
 
-        input:focus {
+        textarea {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        input:focus,
+        textarea:focus {
             outline: 2px solid var(--blue);
             border-color: transparent;
         }
@@ -394,7 +408,6 @@
             height: 100%;
             border: 0;
             display: block;
-            margin: -16px;
         }
 
         .msg {
@@ -435,14 +448,174 @@
             padding: 10px;
         }
 
+        /* Style Horloge */
+        .clock-box {
+            text-align: center;
+            background: var(--bg);
+            border: 1px solid var(--ln);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .clock-box h3 {
+            margin: 0;
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--acc);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .clock-box p {
+            margin: 4px 0 0;
+            color: var(--mut);
+            font-size: 13px;
+            text-transform: capitalize;
+        }
+
+        /* Style Case de Paiements */
+        .pay-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .pay-card {
+            background: var(--bg);
+            border: 1px solid var(--ln);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pay-card h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .pay-qr {
+            width: 130px;
+            height: 130px;
+            border: 1px dashed var(--ln);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .pay-qr img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .pay-qr span {
+            color: var(--mut);
+            font-size: 11px;
+            padding: 6px;
+        }
+
+        /* Style Carnet d'Entretien & Voyants */
+        .check-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .check-item {
+            background: var(--bg);
+            border: 1px solid var(--ln);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .check-item strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .check-item small {
+            color: var(--mut);
+            font-size: 11px;
+        }
+
+        .status-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .status-ok {
+            background: rgba(47, 209, 139, 0.15);
+            color: var(--ok);
+            border: 1px solid var(--ok);
+            animation: blinkOk 1s infinite alternate;
+        }
+
+        .status-warn {
+            background: rgba(255, 159, 67, 0.15);
+            color: var(--warn);
+            border: 1px solid var(--warn);
+        }
+
+        .status-bad {
+            background: rgba(255, 93, 108, 0.15);
+            color: var(--bad);
+            border: 1px solid var(--bad);
+            animation: blinkBad 0.8s infinite alternate;
+        }
+
+        @keyframes blinkOk {
+            0% {
+                opacity: 1;
+                box-shadow: 0 0 8px rgba(47, 209, 139, 0.8);
+            }
+
+            100% {
+                opacity: 0.3;
+                box-shadow: 0 0 0px rgba(47, 209, 139, 0);
+            }
+        }
+
+        @keyframes blinkBad {
+            0% {
+                opacity: 1;
+                box-shadow: 0 0 10px rgba(255, 93, 108, 0.9);
+            }
+
+            100% {
+                opacity: 0.3;
+                box-shadow: 0 0 0px rgba(255, 93, 108, 0);
+            }
+        }
+
         @media(max-width:980px) {
             .kpis {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pay-grid {
                 grid-template-columns: 1fr 1fr;
             }
 
             .c5,
             .c4,
             .c3,
+            .c6,
             .c8 {
                 grid-column: span 12;
             }
@@ -461,6 +634,10 @@
                 padding: 12px 14px;
             }
 
+            .pay-grid {
+                grid-template-columns: 1fr;
+            }
+
             .veh {
                 grid-template-columns: 1fr 1fr;
             }
@@ -476,7 +653,6 @@
     <div class="top">
         <div class="brand">
             <div class="logo-container">
-                <!-- Icone SVG Personnalisee Karim Travel -->
                 <svg viewBox="0 0 24 24">
                     <path
                         d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
@@ -526,12 +702,75 @@
             </div>
 
             <div class="card c3">
-                <h2>Mon véhicule</h2>
+                <h2>Heure & Véhicule</h2>
                 <div class="body">
+                    <div class="clock-box" style="margin-bottom:14px;">
+                        <h3 id="liveClock">00:00:00</h3>
+                        <p id="liveDate">--</p>
+                    </div>
                     <div class="veh" id="veh"></div>
                     <p class="msg" style="margin-top:12px">Prix habituel d'une course</p>
                     <div class="f"><input id="rate" type="number" inputmode="numeric" min="0" placeholder="FCFA"><button
                             class="g" id="saveRate">OK</button></div>
+                </div>
+            </div>
+
+            <!-- CARNET D'ENTRETIEN & VOYANTS DU VÉHICULE -->
+            <div class="card c12">
+                <h2>Carnet de Santé & Voyants du Véhicule <span>Suivi de votre voiture</span></h2>
+                <div class="body">
+                    <p class="msg" style="margin-bottom:12px">Cliquez sur un statut pour basculer entre 🟢 OK, 🟠 À
+                        vérifier, et 🔴 Danger.</p>
+                    <div class="check-grid" id="checkGrid"></div>
+
+                    <div class="f" style="margin-top:10px;">
+                        <input id="kmInput" type="number" inputmode="numeric"
+                            placeholder="Kilométrage actuel (ex: 125000 km)">
+                        <button class="g" id="saveKm">Mettre à jour Km</button>
+                    </div>
+
+                    <div style="margin-top:10px;">
+                        <textarea id="carNotes"
+                            placeholder="Notes d'entretien (ex: Vidange prévue dans 2000 km, pneu avant droit faible...)"></textarea>
+                        <button class="g" id="saveNotes" style="margin-top:6px; width:100%;">Sauvegarder les
+                            notes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION : PAIEMENTS -->
+            <div class="card c12">
+                <h2>Plateformes et Caisses de Paiement <span>Scannez ou importez vos QR Codes</span></h2>
+                <div class="body">
+                    <div class="pay-grid">
+                        <div class="pay-card" style="border-top:3px solid var(--orange)">
+                            <h3 style="color:var(--orange)">Orange Money</h3>
+                            <div class="pay-qr" id="qrOM"><span>Aucun QR Code</span></div>
+                            <input type="file" id="fileOM" accept="image/*" style="display:none">
+                            <button class="g" id="btnOM" style="width:100%; font-size:12px;">+ Image QR</button>
+                        </div>
+
+                        <div class="pay-card" style="border-top:3px solid var(--wave)">
+                            <h3 style="color:var(--wave)">Wave</h3>
+                            <div class="pay-qr" id="qrWave"><span>Aucun QR Code</span></div>
+                            <input type="file" id="fileWave" accept="image/*" style="display:none">
+                            <button class="g" id="btnWave" style="width:100%; font-size:12px;">+ Image QR</button>
+                        </div>
+
+                        <div class="pay-card" style="border-top:3px solid var(--blue)">
+                            <h3 style="color:var(--blue)">Carte Bancaire</h3>
+                            <div class="pay-qr" id="qrCard"><span>Aucun QR Code</span></div>
+                            <input type="file" id="fileCard" accept="image/*" style="display:none">
+                            <button class="g" id="btnCard" style="width:100%; font-size:12px;">+ Image QR</button>
+                        </div>
+
+                        <div class="pay-card" style="border-top:3px solid var(--acc)">
+                            <h3 style="color:var(--acc)">Autre / Espèces</h3>
+                            <div class="pay-qr" id="qrOther"><span>Aucun QR Code</span></div>
+                            <input type="file" id="fileOther" accept="image/*" style="display:none">
+                            <button class="g" id="btnOther" style="width:100%; font-size:12px;">+ Image QR</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -565,18 +804,137 @@
         (function () {
             var KEY = 'karimTravel.v2', S, $ = function (i) {return document.getElementById(i)};
             var DEF = {
-                rides: [], deps: [], vers: [], veh: 'Berline', rate: 0, loc: null, ct: [
-                    {n: 'Police secours', t: '17', s: 1}, {n: 'Sapeurs-pompiers', t: '18', s: 1}, {n: 'Ambulance / SAMU', t: '15', s: 1},
-                    {n: 'Mon numéro', t: '', s: 0}, {n: 'Mécanicien', t: '', s: 0}, {n: 'Propriétaire du véhicule', t: '', s: 0}]
+                rides: [], deps: [], vers: [], veh: 'Berline', rate: 0, loc: null,
+                qr: {om: '', wave: '', card: '', other: ''},
+                car: {
+                    km: '',
+                    notes: '',
+                    checks: {
+                        oil: 'ok',      // Huile moteur
+                        water: 'ok',    // Eau / Refroidissement
+                        brakes: 'ok',   // Freins
+                        engine: 'ok',   // Voyant moteur
+                        battery: 'ok',  // Batterie
+                        tires: 'ok'     // Pression des pneus
+                    }
+                },
+                ct: [
+                    {n: 'Police secours', t: '17', s: 1},
+                    {n: 'Sapeurs-pompiers', t: '18', s: 1},
+                    {n: 'Ambulance / SAMU', t: '15', s: 1},
+                    {n: 'Mon numéro', t: '', s: 0},
+                    {n: 'Mécanicien', t: '', s: 0},
+                    {n: 'Propriétaire du véhicule', t: '', s: 0}
+                ]
             };
+
             try {S = JSON.parse(localStorage.getItem(KEY))} catch (e) { }
             if (!S || !S.ct) S = JSON.parse(JSON.stringify(DEF));
+            if (!S.qr) S.qr = {om: '', wave: '', card: '', other: ''};
+            if (!S.car) S.car = JSON.parse(JSON.stringify(DEF.car));
+
             function save() {try {localStorage.setItem(KEY, JSON.stringify(S))} catch (e) { } }
             function f(n) {return Math.round(n).toLocaleString('fr-FR') + ' F'}
             function sum(a) {return a.reduce(function (t, x) {return t + x.a}, 0)}
             function esc(s) {return String(s).replace(/[&<>"']/g, function (c) {return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]})}
             function hm(t) {return new Date(t).toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}
+
+            /* Horloge Temps Réel */
+            function updateClock() {
+                var now = new Date();
+                $('liveClock').textContent = now.toLocaleTimeString('fr-FR');
+                $('liveDate').textContent = now.toLocaleDateString('fr-FR', {weekday: 'short', day: 'numeric', month: 'short'});
+            }
+            setInterval(updateClock, 1000);
+            updateClock();
+
             $('date').textContent = new Date().toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long'});
+
+            function renderQR() {
+                var keys = ['om', 'wave', 'card', 'other'];
+                var ids = ['qrOM', 'qrWave', 'qrCard', 'qrOther'];
+                keys.forEach(function (k, idx) {
+                    var box = $(ids[idx]);
+                    if (S.qr[k]) {
+                        box.innerHTML = '<img src="' + S.qr[k] + '" alt="QR Code">';
+                    } else {
+                        box.innerHTML = '<span>Aucun QR Code</span>';
+                    }
+                });
+            }
+
+            function handleQRUpload(key, fileInput) {
+                var file = fileInput.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        S.qr[key] = e.target.result;
+                        save();
+                        renderQR();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            $('btnOM').onclick = function () {$('fileOM').click();};
+            $('btnWave').onclick = function () {$('fileWave').click();};
+            $('btnCard').onclick = function () {$('fileCard').click();};
+            $('btnOther').onclick = function () {$('fileOther').click();};
+
+            $('fileOM').onchange = function () {handleQRUpload('om', this);};
+            $('fileWave').onchange = function () {handleQRUpload('wave', this);};
+            $('fileCard').onchange = function () {handleQRUpload('card', this);};
+            $('fileOther').onchange = function () {handleQRUpload('other', this);};
+
+            function renderCarChecks() {
+                var items = [
+                    {id: 'oil', label: '🛢️ Niveau d\'Huile'},
+                    {id: 'water', label: '🌡️ Eau / Refroidissement'},
+                    {id: 'brakes', label: '🛑 Système de Freins'},
+                    {id: 'engine', label: '⚠️ Voyant Moteur'},
+                    {id: 'battery', label: '🔋 Batterie'},
+                    {id: 'tires', label: '🛞 Pression Pneus'}
+                ];
+
+                var html = '';
+                items.forEach(function (item) {
+                    var st = S.car.checks[item.id] || 'ok';
+                    var btnClass = st === 'ok' ? 'status-ok' : (st === 'warn' ? 'status-warn' : 'status-bad');
+                    var btnLabel = st === 'ok' ? '🟢 OK' : (st === 'warn' ? '🟠 À vérifier' : '🔴 Danger');
+
+                    html += '<div class="check-item">';
+                    html += '<div><strong>' + item.label + '</strong></div>';
+                    html += '<button class="status-btn ' + btnClass + '" data-check="' + item.id + '">' + btnLabel + '</button>';
+                    html += '</div>';
+                });
+
+                $('checkGrid').innerHTML = html;
+                $('kmInput').value = S.car.km || '';
+                $('carNotes').value = S.car.notes || '';
+            }
+
+            $('checkGrid').onclick = function (e) {
+                var btn = e.target.closest('button');
+                if (!btn || !btn.dataset.check) return;
+                var id = btn.dataset.check;
+                var curr = S.car.checks[id] || 'ok';
+                var next = curr === 'ok' ? 'warn' : (curr === 'warn' ? 'bad' : 'ok');
+                S.car.checks[id] = next;
+                save();
+                renderCarChecks();
+            };
+
+            $('saveKm').onclick = function () {
+                S.car.km = $('kmInput').value;
+                save();
+                alert('Kilométrage sauvegardé !');
+            };
+
+            $('saveNotes').onclick = function () {
+                S.car.notes = $('carNotes').value;
+                save();
+                alert('Notes d\'entretien sauvegardées !');
+            };
 
             function render() {
                 var R = sum(S.rides), D = sum(S.deps), V = sum(S.vers), N = R - D - V, c = S.rides.length;
@@ -593,8 +951,11 @@
                 var q = $('quick'); q.innerHTML = '';
                 (S.rate > 0 ? [S.rate, S.rate * 2, S.rate * 3] : [500, 1000, 2000, 5000]).forEach(function (v) {var b = document.createElement('button'); b.className = 'g'; b.textContent = '+ ' + f(v); b.onclick = function () {addRide(v)}; q.appendChild(b)});
                 $('ct').innerHTML = S.ct.map(function (k, i) {var t = k.t.replace(/\s/g, ''); return '<div class="k' + (k.s ? ' s' : '') + '"><input data-i="' + i + '" data-f="n" value="' + esc(k.n) + '" aria-label="Nom"><input data-i="' + i + '" data-f="t" type="tel" value="' + esc(k.t) + '" placeholder="Numéro" aria-label="Numéro"><div class="f"><a class="btn" style="flex:1;' + (k.s ? 'background:var(--bad);color:#fff' : '') + '" href="' + (t ? 'tel:' + esc(t) : '#') + '">Appeler</a><button class="g" data-copy="' + i + '">Copier</button><button class="g" data-del="' + i + '" aria-label="Supprimer">×</button></div></div>'}).join('');
+                renderQR();
+                renderCarChecks();
                 showMap();
             }
+
             function addRide(a) {a = +a; if (a > 0) {S.rides.push({a: a, t: Date.now()}); save(); render()} }
             $('addRide').onclick = function () {addRide($('amt').value); $('amt').value = ''};
             $('amt').onkeydown = function (e) {if (e.key === 'Enter') $('addRide').click()};
@@ -602,7 +963,8 @@
             $('addDep').onclick = function () {var a = +$('da').value; if (a > 0) {S.deps.push({a: a, l: $('dl').value.trim() || 'Dépense', t: Date.now()}); $('da').value = ''; $('dl').value = ''; save(); render()} };
             $('saveRate').onclick = function () {S.rate = +$('rate').value || 0; save(); render()};
             $('addC').onclick = function () {S.ct.push({n: 'Nouveau contact', t: '', s: 0}); save(); render()};
-            $('reset').onclick = function () {if (confirm('Effacer les courses, dépenses et versements du jour ? Les contacts sont conservés.')) {S.rides = []; S.deps = []; S.vers = []; save(); render()} };
+            $('reset').onclick = function () {if (confirm('Effacer les courses, dépenses et versements du jour ? Les contacts, QR codes et état du véhicule sont conservés.')) {S.rides = []; S.deps = []; S.vers = []; save(); render()} };
+
             document.addEventListener('click', function (e) {
                 var t = e.target.closest('button'); if (!t) return;
                 if (t.dataset.k) {var k = t.dataset.k, ts = +t.dataset.t; S[k] = S[k].filter(function (x) {return x.t !== ts}); save(); render()}
@@ -610,17 +972,18 @@
                 else if (t.dataset.del) {if (confirm('Supprimer ce contact ?')) {S.ct.splice(+t.dataset.del, 1); save(); render()} }
                 else if (t.dataset.copy) {var n = S.ct[+t.dataset.copy].t; try {navigator.clipboard.writeText(n); t.textContent = 'Copié'} catch (x) {t.textContent = n} setTimeout(function () {t.textContent = 'Copier'}, 1500)}
             });
+
             document.addEventListener('input', function (e) {
                 var i = e.target.dataset.i; if (i === undefined) return; S.ct[i][e.target.dataset.f] = e.target.value; save();
                 var a = e.target.parentNode.querySelector('a'), t = S.ct[i].t.replace(/\s/g, ''); if (a) a.href = t ? 'tel:' + t : '#'
             });
 
-            /* ---- Carte et localisation ---- */
+            /* Carte et localisation */
             function parseLoc(s) {
                 s = s.trim(); if (!s) return null;
                 try {s = decodeURIComponent(s)} catch (e) { }
                 if (/^https?:\/\//i.test(s)) {
-                    if (/goo\.gl|maps\.app/i.test(s)) return {err: 'Ce lien court ne peut pas être lu ici. Ouvrez-le, puis copiez les coordonnées ou l\'adresse, ou utilisez le bouton « Lancer l\'itinéraire ».', raw: s};
+                    if (/goo\.gl|maps\.app/i.test(s)) return {err: 'Ce lien court ne peut pas être lu directement. Ouvrez-le, puis copiez les coordonnées ou l\'adresse.', raw: s};
                     var m = s.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/) || s.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || s.match(/[?&](?:q|ll|query|destination|daddr)=(-?\d+\.\d+)[,+ ]\s*(-?\d+\.\d+)/);
                     if (m) return {lat: +m[1], lng: +m[2]};
                     try {var u = new URL(s), q = u.searchParams.get('q') || u.searchParams.get('query') || u.searchParams.get('destination'); if (q) return {addr: q}} catch (e) { }
@@ -654,6 +1017,7 @@
                 navigator.geolocation.getCurrentPosition(function (p) {S.loc = {lat: +p.coords.latitude.toFixed(6), lng: +p.coords.longitude.toFixed(6)}; save(); showMap(); setMsg('Voici votre position actuelle.')},
                     function () {setMsg('Position refusée. Autorisez la localisation dans votre navigateur.', 1)}, {enableHighAccuracy: true, timeout: 15000});
             };
+
             render();
         })();
     </script>
