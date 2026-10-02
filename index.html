@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Karim Travel - Chauffeur Pro</title>
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0f1c">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0a0f1c;
@@ -802,10 +804,10 @@
 
     <script>
         (function () {
-            var KEY = 'karimTravel.v2', S, $ = function (i) {return document.getElementById(i)};
+            var KEY = 'karimTravel.v2', S, $ = function (i) { return document.getElementById(i) };
             var DEF = {
                 rides: [], deps: [], vers: [], veh: 'Berline', rate: 0, loc: null,
-                qr: {om: '', wave: '', card: '', other: ''},
+                qr: { om: '', wave: '', card: '', other: '' },
                 car: {
                     km: '',
                     notes: '',
@@ -819,36 +821,36 @@
                     }
                 },
                 ct: [
-                    {n: 'Police secours', t: '17', s: 1},
-                    {n: 'Sapeurs-pompiers', t: '18', s: 1},
-                    {n: 'Ambulance / SAMU', t: '15', s: 1},
-                    {n: 'Mon numéro', t: '', s: 0},
-                    {n: 'Mécanicien', t: '', s: 0},
-                    {n: 'Propriétaire du véhicule', t: '', s: 0}
+                    { n: 'Police secours', t: '17', s: 1 },
+                    { n: 'Sapeurs-pompiers', t: '18', s: 1 },
+                    { n: 'Ambulance / SAMU', t: '15', s: 1 },
+                    { n: 'Mon numéro', t: '', s: 0 },
+                    { n: 'Mécanicien', t: '', s: 0 },
+                    { n: 'Propriétaire du véhicule', t: '', s: 0 }
                 ]
             };
 
-            try {S = JSON.parse(localStorage.getItem(KEY))} catch (e) { }
+            try { S = JSON.parse(localStorage.getItem(KEY)) } catch (e) { }
             if (!S || !S.ct) S = JSON.parse(JSON.stringify(DEF));
-            if (!S.qr) S.qr = {om: '', wave: '', card: '', other: ''};
+            if (!S.qr) S.qr = { om: '', wave: '', card: '', other: '' };
             if (!S.car) S.car = JSON.parse(JSON.stringify(DEF.car));
 
-            function save() {try {localStorage.setItem(KEY, JSON.stringify(S))} catch (e) { } }
-            function f(n) {return Math.round(n).toLocaleString('fr-FR') + ' F'}
-            function sum(a) {return a.reduce(function (t, x) {return t + x.a}, 0)}
-            function esc(s) {return String(s).replace(/[&<>"']/g, function (c) {return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]})}
-            function hm(t) {return new Date(t).toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'})}
+            function save() { try { localStorage.setItem(KEY, JSON.stringify(S)) } catch (e) { } }
+            function f(n) { return Math.round(n).toLocaleString('fr-FR') + ' F' }
+            function sum(a) { return a.reduce(function (t, x) { return t + x.a }, 0) }
+            function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+            function hm(t) { return new Date(t).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) }
 
             /* Horloge Temps Réel */
             function updateClock() {
                 var now = new Date();
                 $('liveClock').textContent = now.toLocaleTimeString('fr-FR');
-                $('liveDate').textContent = now.toLocaleDateString('fr-FR', {weekday: 'short', day: 'numeric', month: 'short'});
+                $('liveDate').textContent = now.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' });
             }
             setInterval(updateClock, 1000);
             updateClock();
 
-            $('date').textContent = new Date().toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long'});
+            $('date').textContent = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 
             function renderQR() {
                 var keys = ['om', 'wave', 'card', 'other'];
@@ -876,24 +878,24 @@
                 }
             }
 
-            $('btnOM').onclick = function () {$('fileOM').click();};
-            $('btnWave').onclick = function () {$('fileWave').click();};
-            $('btnCard').onclick = function () {$('fileCard').click();};
-            $('btnOther').onclick = function () {$('fileOther').click();};
+            $('btnOM').onclick = function () { $('fileOM').click(); };
+            $('btnWave').onclick = function () { $('fileWave').click(); };
+            $('btnCard').onclick = function () { $('fileCard').click(); };
+            $('btnOther').onclick = function () { $('fileOther').click(); };
 
-            $('fileOM').onchange = function () {handleQRUpload('om', this);};
-            $('fileWave').onchange = function () {handleQRUpload('wave', this);};
-            $('fileCard').onchange = function () {handleQRUpload('card', this);};
-            $('fileOther').onchange = function () {handleQRUpload('other', this);};
+            $('fileOM').onchange = function () { handleQRUpload('om', this); };
+            $('fileWave').onchange = function () { handleQRUpload('wave', this); };
+            $('fileCard').onchange = function () { handleQRUpload('card', this); };
+            $('fileOther').onchange = function () { handleQRUpload('other', this); };
 
             function renderCarChecks() {
                 var items = [
-                    {id: 'oil', label: '🛢️ Niveau d\'Huile'},
-                    {id: 'water', label: '🌡️ Eau / Refroidissement'},
-                    {id: 'brakes', label: '🛑 Système de Freins'},
-                    {id: 'engine', label: '⚠️ Voyant Moteur'},
-                    {id: 'battery', label: '🔋 Batterie'},
-                    {id: 'tires', label: '🛞 Pression Pneus'}
+                    { id: 'oil', label: '🛢️ Niveau d\'Huile' },
+                    { id: 'water', label: '🌡️ Eau / Refroidissement' },
+                    { id: 'brakes', label: '🛑 Système de Freins' },
+                    { id: 'engine', label: '⚠️ Voyant Moteur' },
+                    { id: 'battery', label: '🔋 Batterie' },
+                    { id: 'tires', label: '🛞 Pression Pneus' }
                 ];
 
                 var html = '';
@@ -942,35 +944,35 @@
                 $('cnt').textContent = c; $('avg').textContent = c ? 'Moyenne ' + f(R / c) : '';
                 $('cTot').textContent = f(R); $('cVer').textContent = f(V);
                 var g = $('gN'); g.textContent = f(N); g.className = N < 0 ? 'bad' : 'ok';
-                var rows = S.rides.map(function (r) {return {k: 'rides', l: 'Course', r: r}}).concat(S.vers.map(function (r) {return {k: 'vers', l: 'Versement', r: r}})).sort(function (a, b) {return b.r.t - a.r.t});
-                $('rides').innerHTML = rows.length ? rows.map(function (x) {return '<li><span><i>' + hm(x.r.t) + '</i>' + x.l + '</span><span><b>' + f(x.r.a) + '</b> <button data-k="' + x.k + '" data-t="' + x.r.t + '" aria-label="Supprimer">×</button></span></li>'}).join('') : '<li class="emp">Ajoutez votre première course.</li>';
-                $('deps').innerHTML = S.deps.length ? S.deps.slice().reverse().map(function (r) {return '<li><span>' + esc(r.l) + '</span><span><b>' + f(r.a) + '</b> <button data-k="deps" data-t="' + r.t + '" aria-label="Supprimer">×</button></span></li>'}).join('') : '<li class="emp">Aucune dépense enregistrée.</li>';
+                var rows = S.rides.map(function (r) { return { k: 'rides', l: 'Course', r: r } }).concat(S.vers.map(function (r) { return { k: 'vers', l: 'Versement', r: r } })).sort(function (a, b) { return b.r.t - a.r.t });
+                $('rides').innerHTML = rows.length ? rows.map(function (x) { return '<li><span><i>' + hm(x.r.t) + '</i>' + x.l + '</span><span><b>' + f(x.r.a) + '</b> <button data-k="' + x.k + '" data-t="' + x.r.t + '" aria-label="Supprimer">×</button></span></li>' }).join('') : '<li class="emp">Ajoutez votre première course.</li>';
+                $('deps').innerHTML = S.deps.length ? S.deps.slice().reverse().map(function (r) { return '<li><span>' + esc(r.l) + '</span><span><b>' + f(r.a) + '</b> <button data-k="deps" data-t="' + r.t + '" aria-label="Supprimer">×</button></span></li>' }).join('') : '<li class="emp">Aucune dépense enregistrée.</li>';
                 var V4 = [['Berline', '🚗'], ['Minibus', '🚐'], ['Bus', '🚌'], ['Camion', '🚚']];
-                $('veh').innerHTML = V4.map(function (v) {return '<button class="' + (v[0] === S.veh ? 'on' : '') + '" data-v="' + v[0] + '"><em>' + v[1] + '</em>' + v[0] + '</button>'}).join('');
+                $('veh').innerHTML = V4.map(function (v) { return '<button class="' + (v[0] === S.veh ? 'on' : '') + '" data-v="' + v[0] + '"><em>' + v[1] + '</em>' + v[0] + '</button>' }).join('');
                 $('rate').value = S.rate || '';
                 var q = $('quick'); q.innerHTML = '';
-                (S.rate > 0 ? [S.rate, S.rate * 2, S.rate * 3] : [500, 1000, 2000, 5000]).forEach(function (v) {var b = document.createElement('button'); b.className = 'g'; b.textContent = '+ ' + f(v); b.onclick = function () {addRide(v)}; q.appendChild(b)});
-                $('ct').innerHTML = S.ct.map(function (k, i) {var t = k.t.replace(/\s/g, ''); return '<div class="k' + (k.s ? ' s' : '') + '"><input data-i="' + i + '" data-f="n" value="' + esc(k.n) + '" aria-label="Nom"><input data-i="' + i + '" data-f="t" type="tel" value="' + esc(k.t) + '" placeholder="Numéro" aria-label="Numéro"><div class="f"><a class="btn" style="flex:1;' + (k.s ? 'background:var(--bad);color:#fff' : '') + '" href="' + (t ? 'tel:' + esc(t) : '#') + '">Appeler</a><button class="g" data-copy="' + i + '">Copier</button><button class="g" data-del="' + i + '" aria-label="Supprimer">×</button></div></div>'}).join('');
+                (S.rate > 0 ? [S.rate, S.rate * 2, S.rate * 3] : [500, 1000, 2000, 5000]).forEach(function (v) { var b = document.createElement('button'); b.className = 'g'; b.textContent = '+ ' + f(v); b.onclick = function () { addRide(v) }; q.appendChild(b) });
+                $('ct').innerHTML = S.ct.map(function (k, i) { var t = k.t.replace(/\s/g, ''); return '<div class="k' + (k.s ? ' s' : '') + '"><input data-i="' + i + '" data-f="n" value="' + esc(k.n) + '" aria-label="Nom"><input data-i="' + i + '" data-f="t" type="tel" value="' + esc(k.t) + '" placeholder="Numéro" aria-label="Numéro"><div class="f"><a class="btn" style="flex:1;' + (k.s ? 'background:var(--bad);color:#fff' : '') + '" href="' + (t ? 'tel:' + esc(t) : '#') + '">Appeler</a><button class="g" data-copy="' + i + '">Copier</button><button class="g" data-del="' + i + '" aria-label="Supprimer">×</button></div></div>' }).join('');
                 renderQR();
                 renderCarChecks();
                 showMap();
             }
 
-            function addRide(a) {a = +a; if (a > 0) {S.rides.push({a: a, t: Date.now()}); save(); render()} }
-            $('addRide').onclick = function () {addRide($('amt').value); $('amt').value = ''};
-            $('amt').onkeydown = function (e) {if (e.key === 'Enter') $('addRide').click()};
-            $('addVer').onclick = function () {var a = +$('ver').value; if (a > 0) {S.vers.push({a: a, t: Date.now()}); $('ver').value = ''; save(); render()} };
-            $('addDep').onclick = function () {var a = +$('da').value; if (a > 0) {S.deps.push({a: a, l: $('dl').value.trim() || 'Dépense', t: Date.now()}); $('da').value = ''; $('dl').value = ''; save(); render()} };
-            $('saveRate').onclick = function () {S.rate = +$('rate').value || 0; save(); render()};
-            $('addC').onclick = function () {S.ct.push({n: 'Nouveau contact', t: '', s: 0}); save(); render()};
-            $('reset').onclick = function () {if (confirm('Effacer les courses, dépenses et versements du jour ? Les contacts, QR codes et état du véhicule sont conservés.')) {S.rides = []; S.deps = []; S.vers = []; save(); render()} };
+            function addRide(a) { a = +a; if (a > 0) { S.rides.push({ a: a, t: Date.now() }); save(); render() } }
+            $('addRide').onclick = function () { addRide($('amt').value); $('amt').value = '' };
+            $('amt').onkeydown = function (e) { if (e.key === 'Enter') $('addRide').click() };
+            $('addVer').onclick = function () { var a = +$('ver').value; if (a > 0) { S.vers.push({ a: a, t: Date.now() }); $('ver').value = ''; save(); render() } };
+            $('addDep').onclick = function () { var a = +$('da').value; if (a > 0) { S.deps.push({ a: a, l: $('dl').value.trim() || 'Dépense', t: Date.now() }); $('da').value = ''; $('dl').value = ''; save(); render() } };
+            $('saveRate').onclick = function () { S.rate = +$('rate').value || 0; save(); render() };
+            $('addC').onclick = function () { S.ct.push({ n: 'Nouveau contact', t: '', s: 0 }); save(); render() };
+            $('reset').onclick = function () { if (confirm('Effacer les courses, dépenses et versements du jour ? Les contacts, QR codes et état du véhicule sont conservés.')) { S.rides = []; S.deps = []; S.vers = []; save(); render() } };
 
             document.addEventListener('click', function (e) {
                 var t = e.target.closest('button'); if (!t) return;
-                if (t.dataset.k) {var k = t.dataset.k, ts = +t.dataset.t; S[k] = S[k].filter(function (x) {return x.t !== ts}); save(); render()}
-                else if (t.dataset.v) {S.veh = t.dataset.v; save(); render()}
-                else if (t.dataset.del) {if (confirm('Supprimer ce contact ?')) {S.ct.splice(+t.dataset.del, 1); save(); render()} }
-                else if (t.dataset.copy) {var n = S.ct[+t.dataset.copy].t; try {navigator.clipboard.writeText(n); t.textContent = 'Copié'} catch (x) {t.textContent = n} setTimeout(function () {t.textContent = 'Copier'}, 1500)}
+                if (t.dataset.k) { var k = t.dataset.k, ts = +t.dataset.t; S[k] = S[k].filter(function (x) { return x.t !== ts }); save(); render() }
+                else if (t.dataset.v) { S.veh = t.dataset.v; save(); render() }
+                else if (t.dataset.del) { if (confirm('Supprimer ce contact ?')) { S.ct.splice(+t.dataset.del, 1); save(); render() } }
+                else if (t.dataset.copy) { var n = S.ct[+t.dataset.copy].t; try { navigator.clipboard.writeText(n); t.textContent = 'Copié' } catch (x) { t.textContent = n } setTimeout(function () { t.textContent = 'Copier' }, 1500) }
             });
 
             document.addEventListener('input', function (e) {
@@ -981,55 +983,53 @@
             /* Carte et localisation */
             function parseLoc(s) {
                 s = s.trim(); if (!s) return null;
-                try {s = decodeURIComponent(s)} catch (e) { }
+                try { s = decodeURIComponent(s) } catch (e) { }
                 if (/^https?:\/\//i.test(s)) {
-                    if (/goo\.gl|maps\.app/i.test(s)) return {err: 'Ce lien court ne peut pas être lu directement. Ouvrez-le, puis copiez les coordonnées ou l\'adresse.', raw: s};
+                    if (/goo\.gl|maps\.app/i.test(s)) return { err: 'Ce lien court ne peut pas être lu directement. Ouvrez-le, puis copiez les coordonnées ou l\'adresse.', raw: s };
                     var m = s.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/) || s.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || s.match(/[?&](?:q|ll|query|destination|daddr)=(-?\d+\.\d+)[,+ ]\s*(-?\d+\.\d+)/);
-                    if (m) return {lat: +m[1], lng: +m[2]};
-                    try {var u = new URL(s), q = u.searchParams.get('q') || u.searchParams.get('query') || u.searchParams.get('destination'); if (q) return {addr: q}} catch (e) { }
-                    return {err: 'Aucun lieu trouvé dans ce lien. Collez plutôt les coordonnées ou l\'adresse.', raw: s};
+                    if (m) return { lat: +m[1], lng: +m[2] };
+                    try { var u = new URL(s), q = u.searchParams.get('q') || u.searchParams.get('query') || u.searchParams.get('destination'); if (q) return { addr: q } } catch (e) { }
+                    return { err: 'Aucun lieu trouvé dans ce lien. Collez plutôt les coordonnées ou l\'adresse.', raw: s };
                 }
                 var c = s.match(/(-?\d{1,3}(?:\.\d+)?)\s*[,;\s]\s*(-?\d{1,3}\.\d+)/);
-                if (c && Math.abs(+c[1]) <= 90 && Math.abs(+c[2]) <= 180) return {lat: +c[1], lng: +c[2]};
-                return {addr: s};
+                if (c && Math.abs(+c[1]) <= 90 && Math.abs(+c[2]) <= 180) return { lat: +c[1], lng: +c[2] };
+                return { addr: s };
             }
-            function place(l) {return l.addr ? l.addr : l.lat + ',' + l.lng}
+            function place(l) { return l.addr ? l.addr : l.lat + ',' + l.lng }
             function showMap() {
                 var l = S.loc, m = $('map');
                 $('route').style.display = $('clr').style.display = l ? 'inline-flex' : 'none';
-                if (!l) {m.innerHTML = 'La carte s\'affichera ici après avoir appuyé sur OK.'; return }
+                if (!l) { m.innerHTML = 'La carte s\'affichera ici après avoir appuyé sur OK.'; return }
                 var p = encodeURIComponent(place(l));
                 m.innerHTML = '<iframe title="Carte" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=' + p + '&z=16&output=embed"></iframe>';
                 $('route').href = 'https://www.google.com/maps/dir/?api=1&destination=' + p + '&travelmode=driving';
             }
-            function setMsg(t, e) {var m = $('locMsg'); m.textContent = t; m.className = 'msg' + (e ? ' e' : '')}
+            function setMsg(t, e) { var m = $('locMsg'); m.textContent = t; m.className = 'msg' + (e ? ' e' : '') }
             $('ok').onclick = function () {
                 var r = parseLoc($('loc').value);
-                if (!r) {setMsg('Collez d\'abord la localisation du client.', 1); return }
-                if (r.err) {setMsg(r.err, 1); return }
+                if (!r) { setMsg('Collez d\'abord la localisation du client.', 1); return }
+                if (r.err) { setMsg(r.err, 1); return }
                 S.loc = r; save(); showMap(); setMsg('Lieu du client affiché : ' + place(r));
             };
-            $('loc').onkeydown = function (e) {if (e.key === 'Enter') $('ok').click()};
-            $('clr').onclick = function () {S.loc = null; $('loc').value = ''; save(); showMap(); setMsg('Carte effacée.')};
+            $('loc').onkeydown = function (e) { if (e.key === 'Enter') $('ok').click() };
+            $('clr').onclick = function () { S.loc = null; $('loc').value = ''; save(); showMap(); setMsg('Carte effacée.') };
             $('me').onclick = function () {
-                if (!navigator.geolocation) {setMsg('La localisation n\'est pas disponible sur cet appareil.', 1); return }
+                if (!navigator.geolocation) { setMsg('La localisation n\'est pas disponible sur cet appareil.', 1); return }
                 setMsg('Recherche de votre position…');
-                navigator.geolocation.getCurrentPosition(function (p) {S.loc = {lat: +p.coords.latitude.toFixed(6), lng: +p.coords.longitude.toFixed(6)}; save(); showMap(); setMsg('Voici votre position actuelle.')},
-                    function () {setMsg('Position refusée. Autorisez la localisation dans votre navigateur.', 1)}, {enableHighAccuracy: true, timeout: 15000});
+                navigator.geolocation.getCurrentPosition(function (p) { S.loc = { lat: +p.coords.latitude.toFixed(6), lng: +p.coords.longitude.toFixed(6) }; save(); showMap(); setMsg('Voici votre position actuelle.') },
+                    function () { setMsg('Position refusée. Autorisez la localisation dans votre navigateur.', 1) }, { enableHighAccuracy: true, timeout: 15000 });
             };
 
             render();
         })();
     </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
 </body>
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then((reg) => console.log('Service Worker enregistré !', reg))
-                .catch((err) => console.log('Erreur Service Worker :', err));
-        });
-    }
-</script>
 
 </html>
