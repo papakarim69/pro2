@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Karim Travel - Chauffeur Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
     <style>
         :root {
             --bg: #0a0f1c;
@@ -1022,5 +1022,14 @@
         })();
     </script>
 </body>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((reg) => console.log('Service Worker enregistré !', reg))
+                .catch((err) => console.log('Erreur Service Worker :', err));
+        });
+    }
+</script>
 
 </html>
